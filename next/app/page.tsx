@@ -1,9 +1,9 @@
-import { PageComponent } from "./components/title/TitlePage";
+import { TitlePage } from "./components/title/TitlePage";
 
 export default function Home() {
   return (
     <main>
-      <PageComponent />
+      <TitlePage subType="image" />
     </main>
   );
 }

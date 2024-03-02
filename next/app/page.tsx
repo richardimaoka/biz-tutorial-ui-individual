@@ -1,4 +1,4 @@
-import { PageComponent } from "./components/page/PageComponent";
+import { PageComponent } from "./components/title/TitlePage";
 
 export default function Home() {
   return (

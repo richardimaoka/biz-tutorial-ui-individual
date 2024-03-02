@@ -2,9 +2,64 @@
 
 package model
 
+import (
+	"fmt"
+	"io"
+	"strconv"
+)
+
+type Image struct {
+	URL    string `json:"url"`
+	Height int    `json:"height"`
+	Width  int    `json:"width"`
+}
+
 type Query struct {
 }
 
 type TitlePage struct {
-	Title string `json:"title"`
+	Title   string            `json:"title"`
+	SubType *TitlePageSubType `json:"subType,omitempty"`
+	Image   *Image            `json:"image,omitempty"`
+}
+
+type TitlePageSubType string
+
+const (
+	TitlePageSubTypeTitle      TitlePageSubType = "TITLE"
+	TitlePageSubTypeTitleimage TitlePageSubType = "TITLEIMAGE"
+)
+
+var AllTitlePageSubType = []TitlePageSubType{
+	TitlePageSubTypeTitle,
+	TitlePageSubTypeTitleimage,
+}
+
+func (e TitlePageSubType) IsValid() bool {
+	switch e {
+	case TitlePageSubTypeTitle, TitlePageSubTypeTitleimage:
+		return true
+	}
+	return false
+}
+
+func (e TitlePageSubType) String() string {
+	return string(e)
+}
+
+func (e *TitlePageSubType) UnmarshalGQL(v interface{}) error {
+	str, ok := v.(string)
+	if !ok {
+		return fmt.Errorf("enums must be strings")
+	}
+
+	*e = TitlePageSubType(str)
+	if !e.IsValid() {
+		return fmt.Errorf("%s is not a valid TitlePageSubType", str)
+	}
+	return nil
+}
+
+func (e TitlePageSubType) MarshalGQL(w io.Writer) {
+	fmt.Fprint(w, strconv.Quote(e.String()))
 }

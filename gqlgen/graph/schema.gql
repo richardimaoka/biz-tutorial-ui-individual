@@ -2,8 +2,21 @@
 #
 # https://gqlgen.com/getting-started/
 
+type Image {
+  url: String!
+  height: Int!
+  width: Int!
+}
+
+enum TitlePageSubType {
+  TITLE
+  TITLEIMAGE
+}
+
 type TitlePage {
   title: String!
+  subType: TitlePageSubType
+  image: Image
 }
 
 type Query {

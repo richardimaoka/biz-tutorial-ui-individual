@@ -1,12 +1,15 @@
 .component {
   background-color: white;
 
-  position: relative;
-
   margin: 0 auto;
 
   width: 768px; /* overridden by media queries later in this file */
   height: 100svh;
+
+  /* place contents */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 @media (max-width: 768px) {

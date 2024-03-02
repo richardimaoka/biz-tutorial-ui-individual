@@ -20,14 +20,6 @@ interface Props {
 
 export function TitlePage(props: Props) {
   switch (props.subType) {
-    case "simple":
-      return (
-        <div className={styles.component}>
-          <h1>
-            Next.jsでドキュメント・サイトのリアルタイム検索ボックスを実装する
-          </h1>
-        </div>
-      );
     case "image":
       return (
         <div className={styles.component}>

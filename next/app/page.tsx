@@ -1,3 +1,9 @@
+import { PageComponent } from "./components/page/PageComponent";
+
 export default function Home() {
-  return <main>empty application</main>;
+  return (
+    <main>
+      <PageComponent />
+    </main>
+  );
 }

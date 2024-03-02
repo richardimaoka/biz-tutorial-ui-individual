@@ -48,7 +48,7 @@ type DirectiveRoot struct {
 type ComplexityRoot struct {
 	Image struct {
 		Height func(childComplexity int) int
-		URL    func(childComplexity int) int
+		Path   func(childComplexity int) int
 		Width  func(childComplexity int) int
 	}
 
@@ -93,12 +93,12 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 
 		return e.complexity.Image.Height(childComplexity), true
 
-	case "Image.url":
-		if e.complexity.Image.URL == nil {
+	case "Image.path":
+		if e.complexity.Image.Path == nil {
 			break
 		}
 
-		return e.complexity.Image.URL(childComplexity), true
+		return e.complexity.Image.Path(childComplexity), true
 
 	case "Image.width":
 		if e.complexity.Image.Width == nil {
@@ -296,8 +296,8 @@ func (ec *executionContext) field___Type_fields_args(ctx context.Context, rawArg
 
 // region    **************************** field.gotpl *****************************
 
-func (ec *executionContext) _Image_url(ctx context.Context, field graphql.CollectedField, obj *model.Image) (ret graphql.Marshaler) {
-	fc, err := ec.fieldContext_Image_url(ctx, field)
+func (ec *executionContext) _Image_path(ctx context.Context, field graphql.CollectedField, obj *model.Image) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_Image_path(ctx, field)
 	if err != nil {
 		return graphql.Null
 	}
@@ -310,7 +310,7 @@ func (ec *executionContext) _Image_url(ctx context.Context, field graphql.Collec
 	}()
 	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
 		ctx = rctx // use context from middleware stack in children
-		return obj.URL, nil
+		return obj.Path, nil
 	})
 	if err != nil {
 		ec.Error(ctx, err)
@@ -327,7 +327,7 @@ func (ec *executionContext) _Image_url(ctx context.Context, field graphql.Collec
 	return ec.marshalNString2string(ctx, field.Selections, res)
 }
 
-func (ec *executionContext) fieldContext_Image_url(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+func (ec *executionContext) fieldContext_Image_path(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
 	fc = &graphql.FieldContext{
 		Object:     "Image",
 		Field:      field,
@@ -727,8 +727,8 @@ func (ec *executionContext) fieldContext_TitlePage_image(ctx context.Context, fi
 		IsResolver: false,
 		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
 			switch field.Name {
-			case "url":
-				return ec.fieldContext_Image_url(ctx, field)
+			case "path":
+				return ec.fieldContext_Image_path(ctx, field)
 			case "height":
 				return ec.fieldContext_Image_height(ctx, field)
 			case "width":
@@ -2532,8 +2532,8 @@ func (ec *executionContext) _Image(ctx context.Context, sel ast.SelectionSet, ob
 		switch field.Name {
 		case "__typename":
 			out.Values[i] = graphql.MarshalString("Image")
-		case "url":
-			out.Values[i] = ec._Image_url(ctx, field, obj)
+		case "path":
+			out.Values[i] = ec._Image_path(ctx, field, obj)
 			if out.Values[i] == graphql.Null {
 				out.Invalids++
 			}

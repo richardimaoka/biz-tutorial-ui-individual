@@ -3,14 +3,16 @@
 # https://gqlgen.com/getting-started/
 
 type Image {
-  url: String!
+  path: String! # path, not url, because it can be a local image
   height: Int!
   width: Int!
 }
 
 enum TitlePageSubType {
-  TITLE
-  TITLEIMAGE
+  SIMPLE
+  IMAGE
+  # VIDEO
+  # MARKDOWN
 }
 
 type TitlePage {

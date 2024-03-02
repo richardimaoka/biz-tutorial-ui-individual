@@ -9,7 +9,7 @@ import (
 )
 
 type Image struct {
-	URL    string `json:"url"`
+	Path   string `json:"path"`
 	Height int    `json:"height"`
 	Width  int    `json:"width"`
 }
@@ -26,18 +26,18 @@ type TitlePage struct {
 type TitlePageSubType string
 
 const (
-	TitlePageSubTypeTitle      TitlePageSubType = "TITLE"
-	TitlePageSubTypeTitleimage TitlePageSubType = "TITLEIMAGE"
+	TitlePageSubTypeSimple TitlePageSubType = "SIMPLE"
+	TitlePageSubTypeImage  TitlePageSubType = "IMAGE"
 )
 
 var AllTitlePageSubType = []TitlePageSubType{
-	TitlePageSubTypeTitle,
-	TitlePageSubTypeTitleimage,
+	TitlePageSubTypeSimple,
+	TitlePageSubTypeImage,
 }
 
 func (e TitlePageSubType) IsValid() bool {
 	switch e {
-	case TitlePageSubTypeTitle, TitlePageSubTypeTitleimage:
+	case TitlePageSubTypeSimple, TitlePageSubTypeImage:
 		return true
 	}
 	return false

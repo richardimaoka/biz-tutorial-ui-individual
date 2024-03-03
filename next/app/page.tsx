@@ -1,9 +1,9 @@
-import { TitlePage } from "./components/title/TitlePage";
+import { VideoStep } from "./components/video/VideoStep";
 
 export default function Home() {
   return (
     <main>
-      <TitlePage />
+      <VideoStep />
     </main>
   );
 }

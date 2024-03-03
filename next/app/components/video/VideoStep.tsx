@@ -1,3 +1,4 @@
+import { StepContainer } from "../step/StepContainer";
 import styles from "./VideoStep.module.css";
 
 interface Video {
@@ -12,7 +13,7 @@ interface Props {
 
 export function VideoStep(props: Props) {
   return (
-    <div className={styles.component}>
+    <StepContainer>
       <iframe
         className={styles.iframe}
         width="1080"
@@ -22,6 +23,6 @@ export function VideoStep(props: Props) {
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
       ></iframe>
-    </div>
+    </StepContainer>
   );
 }

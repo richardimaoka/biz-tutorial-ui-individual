@@ -1,3 +1,4 @@
+import { StepContainer } from "../step/StepContainer";
 import styles from "./TitlePage.module.css";
 
 interface Image {
@@ -22,22 +23,22 @@ export function TitlePage(props: Props) {
   switch (props.subType) {
     case "image":
       return (
-        <div className={styles.component}>
+        <StepContainer>
           <h1
             className={styles.visuallyHidden}
             aria-label="Next.jsでドキュメント・サイトのリアルタイム検索ボックスを実装する"
           >
             Next.jsでドキュメント・サイトのリアルタイム検索ボックスを実装する
           </h1>
-        </div>
+        </StepContainer>
       );
     default:
       return (
-        <div className={styles.component}>
+        <StepContainer>
           <h1>
             Next.jsでドキュメント・サイトのリアルタイム検索ボックスを実装する
           </h1>
-        </div>
+        </StepContainer>
       );
   }
 }

@@ -1,29 +1,3 @@
-.component {
-  background-color: white;
-
-  margin: 0 auto;
-
-  width: 768px; /* overridden by media queries later in this file */
-  height: 100svh;
-
-  /* place contents */
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-@media (max-width: 768px) {
-  .component {
-    width: 100svw;
-  }
-}
-
-@media (min-width: 769px) {
-  .component {
-    width: 768px;
-  }
-}
-
 .visuallyHidden {
   clip: rect(0 0 0 0);
   clip-path: inset(50%);

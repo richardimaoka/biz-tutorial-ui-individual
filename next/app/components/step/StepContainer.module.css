@@ -1,0 +1,26 @@
+.component {
+  background-color: white;
+
+  margin: 0 auto;
+
+  /* width and height are defined with media queries */
+
+  /* place contents */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@media (max-width: 768px) {
+  .component {
+    width: 100svw;
+    height: 100svh;
+  }
+}
+
+@media (min-width: 769px) {
+  .component {
+    width: 768px;
+    height: 100svh;
+  }
+}

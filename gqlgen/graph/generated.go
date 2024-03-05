@@ -56,6 +56,14 @@ type ComplexityRoot struct {
 		TitlePage func(childComplexity int) int
 	}
 
+	TerminalSlide struct {
+		Steps func(childComplexity int) int
+	}
+
+	TerminalStep struct {
+		Command func(childComplexity int) int
+	}
+
 	TitlePage struct {
 		Image   func(childComplexity int) int
 		SubType func(childComplexity int) int
@@ -113,6 +121,20 @@ func (e *executableSchema) Complexity(typeName, field string, childComplexity in
 		}
 
 		return e.complexity.Query.TitlePage(childComplexity), true
+
+	case "TerminalSlide.steps":
+		if e.complexity.TerminalSlide.Steps == nil {
+			break
+		}
+
+		return e.complexity.TerminalSlide.Steps(childComplexity), true
+
+	case "TerminalStep.command":
+		if e.complexity.TerminalStep.Command == nil {
+			break
+		}
+
+		return e.complexity.TerminalStep.Command(childComplexity), true
 
 	case "TitlePage.image":
 		if e.complexity.TitlePage.Image == nil {
@@ -601,6 +623,92 @@ func (ec *executionContext) fieldContext_Query___schema(ctx context.Context, fie
 				return ec.fieldContext___Schema_directives(ctx, field)
 			}
 			return nil, fmt.Errorf("no field named %q was found under type __Schema", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _TerminalSlide_steps(ctx context.Context, field graphql.CollectedField, obj *model.TerminalSlide) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_TerminalSlide_steps(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Steps, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.([]*model.TerminalStep)
+	fc.Result = res
+	return ec.marshalOTerminalStep2ᚕᚖgithubᚗcomᚋrichardimaokaᚋbizᚑtutorialᚑuiᚑindividualᚋgqlgenᚋgraphᚋmodelᚐTerminalStep(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_TerminalSlide_steps(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "TerminalSlide",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			switch field.Name {
+			case "command":
+				return ec.fieldContext_TerminalStep_command(ctx, field)
+			}
+			return nil, fmt.Errorf("no field named %q was found under type TerminalStep", field.Name)
+		},
+	}
+	return fc, nil
+}
+
+func (ec *executionContext) _TerminalStep_command(ctx context.Context, field graphql.CollectedField, obj *model.TerminalStep) (ret graphql.Marshaler) {
+	fc, err := ec.fieldContext_TerminalStep_command(ctx, field)
+	if err != nil {
+		return graphql.Null
+	}
+	ctx = graphql.WithFieldContext(ctx, fc)
+	defer func() {
+		if r := recover(); r != nil {
+			ec.Error(ctx, ec.Recover(ctx, r))
+			ret = graphql.Null
+		}
+	}()
+	resTmp, err := ec.ResolverMiddleware(ctx, func(rctx context.Context) (interface{}, error) {
+		ctx = rctx // use context from middleware stack in children
+		return obj.Command, nil
+	})
+	if err != nil {
+		ec.Error(ctx, err)
+		return graphql.Null
+	}
+	if resTmp == nil {
+		return graphql.Null
+	}
+	res := resTmp.(*string)
+	fc.Result = res
+	return ec.marshalOString2ᚖstring(ctx, field.Selections, res)
+}
+
+func (ec *executionContext) fieldContext_TerminalStep_command(ctx context.Context, field graphql.CollectedField) (fc *graphql.FieldContext, err error) {
+	fc = &graphql.FieldContext{
+		Object:     "TerminalStep",
+		Field:      field,
+		IsMethod:   false,
+		IsResolver: false,
+		Child: func(ctx context.Context, field graphql.CollectedField) (*graphql.FieldContext, error) {
+			return nil, errors.New("field of type String does not have child fields")
 		},
 	}
 	return fc, nil
@@ -2639,6 +2747,78 @@ func (ec *executionContext) _Query(ctx context.Context, sel ast.SelectionSet) gr
 	return out
 }
 
+var terminalSlideImplementors = []string{"TerminalSlide"}
+
+func (ec *executionContext) _TerminalSlide(ctx context.Context, sel ast.SelectionSet, obj *model.TerminalSlide) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, terminalSlideImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("TerminalSlide")
+		case "steps":
+			out.Values[i] = ec._TerminalSlide_steps(ctx, field, obj)
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
+var terminalStepImplementors = []string{"TerminalStep"}
+
+func (ec *executionContext) _TerminalStep(ctx context.Context, sel ast.SelectionSet, obj *model.TerminalStep) graphql.Marshaler {
+	fields := graphql.CollectFields(ec.OperationContext, sel, terminalStepImplementors)
+
+	out := graphql.NewFieldSet(fields)
+	deferred := make(map[string]*graphql.FieldSet)
+	for i, field := range fields {
+		switch field.Name {
+		case "__typename":
+			out.Values[i] = graphql.MarshalString("TerminalStep")
+		case "command":
+			out.Values[i] = ec._TerminalStep_command(ctx, field, obj)
+		default:
+			panic("unknown field " + strconv.Quote(field.Name))
+		}
+	}
+	out.Dispatch(ctx)
+	if out.Invalids > 0 {
+		return graphql.Null
+	}
+
+	atomic.AddInt32(&ec.deferred, int32(len(deferred)))
+
+	for label, dfs := range deferred {
+		ec.processDeferredGroup(graphql.DeferredGroup{
+			Label:    label,
+			Path:     graphql.GetPath(ctx),
+			FieldSet: dfs,
+			Context:  ctx,
+		})
+	}
+
+	return out
+}
+
 var titlePageImplementors = []string{"TitlePage"}
 
 func (ec *executionContext) _TitlePage(ctx context.Context, sel ast.SelectionSet, obj *model.TitlePage) graphql.Marshaler {
@@ -3353,6 +3533,54 @@ func (ec *executionContext) marshalOString2ᚖstring(ctx context.Context, sel as
 	}
 	res := graphql.MarshalString(*v)
 	return res
+}
+
+func (ec *executionContext) marshalOTerminalStep2ᚕᚖgithubᚗcomᚋrichardimaokaᚋbizᚑtutorialᚑuiᚑindividualᚋgqlgenᚋgraphᚋmodelᚐTerminalStep(ctx context.Context, sel ast.SelectionSet, v []*model.TerminalStep) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	ret := make(graphql.Array, len(v))
+	var wg sync.WaitGroup
+	isLen1 := len(v) == 1
+	if !isLen1 {
+		wg.Add(len(v))
+	}
+	for i := range v {
+		i := i
+		fc := &graphql.FieldContext{
+			Index:  &i,
+			Result: &v[i],
+		}
+		ctx := graphql.WithFieldContext(ctx, fc)
+		f := func(i int) {
+			defer func() {
+				if r := recover(); r != nil {
+					ec.Error(ctx, ec.Recover(ctx, r))
+					ret = nil
+				}
+			}()
+			if !isLen1 {
+				defer wg.Done()
+			}
+			ret[i] = ec.marshalOTerminalStep2ᚖgithubᚗcomᚋrichardimaokaᚋbizᚑtutorialᚑuiᚑindividualᚋgqlgenᚋgraphᚋmodelᚐTerminalStep(ctx, sel, v[i])
+		}
+		if isLen1 {
+			f(i)
+		} else {
+			go f(i)
+		}
+
+	}
+	wg.Wait()
+
+	return ret
+}
+
+func (ec *executionContext) marshalOTerminalStep2ᚖgithubᚗcomᚋrichardimaokaᚋbizᚑtutorialᚑuiᚑindividualᚋgqlgenᚋgraphᚋmodelᚐTerminalStep(ctx context.Context, sel ast.SelectionSet, v *model.TerminalStep) graphql.Marshaler {
+	if v == nil {
+		return graphql.Null
+	}
+	return ec._TerminalStep(ctx, sel, v)
 }
 
 func (ec *executionContext) marshalOTitlePage2ᚖgithubᚗcomᚋrichardimaokaᚋbizᚑtutorialᚑuiᚑindividualᚋgqlgenᚋgraphᚋmodelᚐTitlePage(ctx context.Context, sel ast.SelectionSet, v *model.TitlePage) graphql.Marshaler {

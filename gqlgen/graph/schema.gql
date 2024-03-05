@@ -21,6 +21,14 @@ type TitlePage {
   image: Image
 }
 
+type TerminalStep {
+  command: String
+}
+
+type TerminalSlide {
+  steps: [TerminalStep]
+}
+
 type Query {
   titlePage: TitlePage
 }

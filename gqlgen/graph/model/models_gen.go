@@ -17,6 +17,14 @@ type Image struct {
 type Query struct {
 }
 
+type TerminalSlide struct {
+	Steps []*TerminalStep `json:"steps,omitempty"`
+}
+
+type TerminalStep struct {
+	Command *string `json:"command,omitempty"`
+}
+
 type TitlePage struct {
 	Title   string            `json:"title"`
 	SubType *TitlePageSubType `json:"subType,omitempty"`

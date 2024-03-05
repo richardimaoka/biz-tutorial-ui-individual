@@ -31,11 +31,11 @@ export function VideoStep(props: Props) {
     }
   });
 
-  function onPlayerReady(e) {
+  function onPlayerReady(e: any) {
     console.log("on player ready", e);
   }
 
-  function onPlayerStateChange(e) {
+  function onPlayerStateChange(e: any) {
     console.log("on player state change", e);
   }
 
